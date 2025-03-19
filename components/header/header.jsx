@@ -7,7 +7,12 @@ const HeaderComp = () => {
     <div className="bg-[#014FB6] text-white justify-between">
       <div className="container h-20 flex items-center justify-between mx-auto ">
         <div>
-          <Image src="/medyanes-360-logo.webp" width={201} height={50} />
+          <Image
+            src="/medyanes-360-logo.webp"
+            width={201}
+            height={50}
+            alt="Medyanes Logo"
+          />
         </div>
         <div className="space-x-4 font-semibold">
           <Link href="/">Üye Ol</Link>
