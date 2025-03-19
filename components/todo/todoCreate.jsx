@@ -29,12 +29,12 @@ const TodoCreate = () => {
         />
         <div className="flex items-center justify-center space-x-4 pr-4">
           <button
-            className="px-6 py-2 bg-green-500 rounded-md"
+            className="px-6 py-2 w-23 bg-green-500 rounded-md cursor-pointer"
             onClick={handleAddTodo}
           >
             Ekle
           </button>
-          <button className="px-6 py-2 bg-red-500 text-white rounded-md">
+          <button className="px-6 py-2 w-23 bg-red-500 text-white rounded-md cursor-pointer">
             Sil
           </button>
         </div>
