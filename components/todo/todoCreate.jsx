@@ -1,9 +1,17 @@
 "use client";
 
+import { postAPI } from "@/services/fetchAPI";
 import { useState } from "react";
 
 const TodoCreate = () => {
   const [todo, setTodo] = useState("");
+
+  const handleAddTodo = async () => {
+    if (!todo.trim()) return;
+    const newTodo = await postAPI(todo);
+    if (newTodo) setTodo((prev) => [...prev, newTodo]);
+    setTodo("");
+  };
 
   return (
     <div className="flex flex-col items-center justify-center mt-15">
@@ -17,10 +25,15 @@ const TodoCreate = () => {
           value={todo}
           placeholder="Prisma öğrenilecek..."
           onChange={(e) => setTodo(e.target.value)}
-          className=" p-4  outline-none"
+          className=" p-4 outline-none w-full"
         />
         <div className="flex items-center justify-center space-x-4 pr-4">
-          <button className="px-6 py-2 bg-green-500 rounded-md">Ekle</button>
+          <button
+            className="px-6 py-2 bg-green-500 rounded-md"
+            onClick={handleAddTodo}
+          >
+            Ekle
+          </button>
           <button className="px-6 py-2 bg-red-500 text-white rounded-md">
             Sil
           </button>
