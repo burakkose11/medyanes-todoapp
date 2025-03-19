@@ -2,6 +2,8 @@
 
 import { deleteAPI, getAPI, updateAPI } from "@/services/fetchAPI";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -20,6 +22,9 @@ const TodoList = () => {
     const success = await deleteAPI(id);
     if (success) {
       setTodos(todos.filter((todo) => todo.id !== id));
+      toast.error("Todo silindi!");
+    } else {
+      toast.warning("Todo silinemedi...");
     }
   };
 
@@ -34,7 +39,10 @@ const TodoList = () => {
           todo.id === id ? { ...todo, title: updatedTodo.title } : todo
         )
       );
+      toast.success("Todo güncellendi :)");
       setEditTodoId(null);
+    } else {
+      toast.error("Todo güncellenemedi!");
     }
   };
 
@@ -64,7 +72,7 @@ const TodoList = () => {
           <div className="flex items-center space-x-4">
             {editTodoId === todo.id ? (
               <button
-                className="px-6 py-2 bg-green-500 text-white rounded-md cursor-pointer w-23"
+                className="px-6 py-2 bg-green-500 text-white rounded-md cursor-pointer"
                 onClick={() => handleUpdateTodo(todo.id)}
               >
                 Güncelle

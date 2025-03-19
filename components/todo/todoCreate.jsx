@@ -2,6 +2,8 @@
 
 import { postAPI } from "@/services/fetchAPI";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const TodoCreate = () => {
   const [todo, setTodo] = useState("");
@@ -9,8 +11,13 @@ const TodoCreate = () => {
   const handleAddTodo = async () => {
     if (!todo.trim()) return;
     const newTodo = await postAPI(todo);
-    if (newTodo) setTodo((prev) => [...prev, newTodo]);
-    setTodo("");
+    if (newTodo) {
+      setTodo((prev) => [...prev, newTodo]);
+      toast.success("Todo eklendi :)");
+      setTodo("");
+    } else {
+      toast.error("Todo eklenirken bir hata oluştu...");
+    }
   };
 
   return (
@@ -29,13 +36,10 @@ const TodoCreate = () => {
         />
         <div className="flex items-center justify-center space-x-4 pr-4">
           <button
-            className="px-6 py-2 w-23 bg-green-500 rounded-md cursor-pointer"
+            className="px-6 py-2 w-30 bg-green-500 rounded-md cursor-pointer"
             onClick={handleAddTodo}
           >
             Ekle
-          </button>
-          <button className="px-6 py-2 w-23 bg-red-500 text-white rounded-md cursor-pointer">
-            Sil
           </button>
         </div>
       </div>
